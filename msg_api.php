@@ -2,6 +2,7 @@
 require_once('database.php');
 require_once('message_box.php');
 require_once('session_manager.php');
+require_once('on_login.php');
 
 
 $db = db_connect();
@@ -16,12 +17,7 @@ if($_GET["cmd"] == "login") {
   echo(json_encode($id));
 
   if(!is_null($id)) {
-    # Peer matching
-    $peer_id = $session_manager->find_matching_peer($id);
-    if(!is_null($peer_id)) {
-      $messagebox->send_message($id, $peer_id, "JOIN_OFFER", "");
-      $messagebox->send_message($peer_id, $id, "JOIN_OFFER", "");
-    }
+    on_login($id, $db, $messagebox, $session_manager);
   } else {
     die("LOGOUT");
   }
