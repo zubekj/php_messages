@@ -1,6 +1,6 @@
 <?php
 
-function on_login($id, $db, $messegbox, $session_manager) {
+function on_login($id, $db, $messagebox, $session_manager) {
     # Peer matching
     $peer_id = $session_manager->find_matching_peer($id);
     if(!is_null($peer_id)) {

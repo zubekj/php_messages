@@ -8,8 +8,8 @@ $db->query("CREATE TABLE users (
 id INT(6) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 username VARCHAR(30),
 group_id INT(6) UNSIGNED);");
-$db->query("INSERT INTO users ('agent1', 1);");
-$db->query("INSERT INTO users ('agent2', 2);");
+$db->query("INSERT INTO users VALUES (NULL, 'agent1', 1);");
+$db->query("INSERT INTO users VALUES (NULL, 'agent2', 2);");
 
 $db->query("DROP TABLE sessions;");
 $db->query("CREATE TABLE sessions (

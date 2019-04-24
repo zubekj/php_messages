@@ -32,7 +32,7 @@ function MessageClient(logout_callback) {
               _this.id = response;
               typeof callback === 'function' && callback(response);
            },
-           function () { _this.login(callback); });
+           function () { _this.login(username, callback); });
   };
 
 

@@ -36,8 +36,8 @@
 
    
     $(document).ready(function(){
-      client = new MessageClient(null);
-      client.login("agent1", reset_agent);
+      client = new MessageClient(function() { client.login("agent2", reset_agent); });
+      client.login("agent2", reset_agent);
     });
 
     </script>

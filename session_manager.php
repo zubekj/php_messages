@@ -7,7 +7,7 @@ class SessionManager {
   }
 
   function login($username) {
-     $res = $this->db->query('SELECT FROM users id WHERE username='.$username.';');
+     $res = $this->db->query('SELECT id FROM users WHERE username="'.$username.'";');
      if (!$res) {
        die("MySQL query error.");
      } 
@@ -44,12 +44,12 @@ class SessionManager {
      if (!($row = $res->fetch_assoc())) {
        return NULL;
      }
-     $group_id = $row['id'];
+     $group_id = $row['group_id'];
     
      $res = $this->db->query('SELECT sessions.id FROM sessions JOIN users ON sessions.user_id=users.id WHERE peer_id IS NULL AND users.group_id!='.$group_id.' AND UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(last_active) < 10;');
      if (!$res) {
        die("MySQL query error.");
-     } 
+     }
      if (!($row = $res->fetch_assoc())) {
        return NULL;
      }

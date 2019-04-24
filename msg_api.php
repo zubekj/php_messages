@@ -13,7 +13,7 @@ $session_manager = new SessionManager($db);
 
 #TODO: smarter login code
 if($_GET["cmd"] == "login") {
-  $id = $session_manager->login();
+  $id = $session_manager->login($_GET["username"]);
   echo(json_encode($id));
 
   if(!is_null($id)) {
@@ -27,11 +27,12 @@ if($_GET["cmd"] == "login") {
 
 # Checking if logged in
 $idle_time = $session_manager->calculate_idle_time($_GET["id"]);
+if(is_null($_GET["id"]) or is_null($idle_time)) {
+  die("LOGOUT");
+}
 
-if(is_null($idle_time) or $idle_time > 60*10) {
-  if(!is_null($idle_time)) {
-    $session_manager->close_session($_GET["id"]);
-  }
+if($idle_time > 60*10) {
+  $session_manager->close_session($_GET["id"]);
   die("LOGOUT");
 } 
 
